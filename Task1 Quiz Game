@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct Question {
+    string question;
+    map<char, string> choices;
+    char correctAnswer;
+}
+;
+void displayQuestion(Question q) {
+    cout << q.question << endl;
+    for (auto it = q.choices.begin(); it != q.choices.end(); ++it) {
+        cout << it->first << ") " << it->second << endl;
+    }
+
+}
+bool checkAnswer(Question q, char userAnswer, int &score) {
+    if (userAnswer == q.correctAnswer) {
+        cout << "Correct!" << endl;
+        score++;
+        return true;
+    } 
+    else {
+        cout << "Incorrect. The correct answer is: " << q.correctAnswer << endl;
+        return false;
+    }
+}
+int main() {
+Question q1 = {"What is the capital of India?", {{'A', "Hyderabad"}, {'B', "Mumbai"}, {'C', "Delhi"}, {'D', "Chennai"}}, 'C'};
+Question q2 = {"Which river is known as the 'Ganga' in India?", {{'A', "Yamuna"}, {'B', "Brahmaputra"}, {'C', "Indus"}, {'D', "Ganges"}}, 'D'};
+Question q3 = {"Which is the national bird of India?", {{'A', "Peacock"}, {'B', "Sparrow"}, {'C', "Parrot"}, {'D', "Pigeon"}}, 'A'};
+Question q4 = {"Who was the first Prime Minister of India?", {{'A', "Jawaharlal Nehru"}, {'B', "Mahatma Gandhi"}, {'C', "Sardar Patel"}, {'D', "Indira Gandhi"}}, 'A'};
+Question q5 = {"Which city is known as the 'Pink City'?", {{'A', "Bikaner"}, {'B', "Jaipur"}, {'C', "Udaipur"}, {'D', "Jaisalmer"}}, 'B'};
+Question questions[] = {q1, q2, q3, q4, q5};
+    int score = 0;
+
+    for (int i = 0; i < sizeof(questions) / sizeof(questions[0]); i++) 
+    {
+        displayQuestion(questions[i]);
+        char userAnswer;
+        cout << "Enter your answer: ";
+        cin >> userAnswer;
+        checkAnswer(questions[i], toupper(userAnswer), score);
+        cout << endl;
+    }
+        cout << "Your total score is: " << score << "/" << sizeof(questions) / sizeof(questions[0]) << endl;
+    
+    if (score == sizeof(questions) / sizeof(questions[0])) {
+        cout << "Congrats! All the answers are correct!" << endl;
+    } 
+    else {
+        cout << "Better luck next time!" << endl;
+    }
+    return 0;
+}
+
